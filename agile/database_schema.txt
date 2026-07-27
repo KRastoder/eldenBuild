@@ -1,5 +1,5 @@
 
-USER TABLE 
+USER TABLE  // THIS IS MADE BY ENTITY FRAMEWORK
 ---------------
 id
 username
@@ -37,7 +37,7 @@ talisman one
 talisman two
 talisman three
 talisman four 
-statspred statspread
+statspred statspread_id
 
 Weapon Table
 ---------------
@@ -58,44 +58,22 @@ location (region)
 desc
 effect
 
-Helmet Table
+Armour Table
 -------
 id 
 name 
 location(region)
 weight 
 absorpitons add later 
+ArmourType (Helmet,Leggings,Chestplate,Gloves)
 
-Chestplate Table
--------
-id 
-name 
-location(region)
-weight 
-absorpitons add later 
-
-Gloves Table
--------
-id 
-name 
-location(region)
-weight 
-absorpitons add later 
-
-Leggings Table
--------
-id 
-name 
-location(region)
-weight 
-absorpitons add later 
-
+//IMPLEMENTED
 StatSpred table
 -----------------
 Guid id 
 Vigor
 Mind
-Enduranc"
+Enduranc
 Strength
 Dexterity
 Intelligence
@@ -103,5 +81,5 @@ Faith
 Arcane
 
 Subscriptions 
-subscriber_id 
-post_maker_id 
+    subscriber_id 
+    post_maker_id 
