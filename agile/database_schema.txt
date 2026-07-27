@@ -1,0 +1,110 @@
+
+USER TABLE 
+---------------
+id
+username
+email 
+password
+subscriptions (Many)
+myposts(many)
+subscribers(UsersId or username)
+
+POST_TABLE 
+-----------------
+id 
+creator_id 
+title 
+desc 
+Build 
+bool StatusEffectBuild?
+challenge Build? 
+op build?
+
+Build TABLE
+-------------
+Guid id 
+int level 
+starting_Class (Samurai,Vagabond,Wretch,Prisoner,Confesor,Warrrior,Prophet,Bandit,Astrologer,Hero)
+weapon one 
+weapon two 
+talisman one 
+talisman two 
+talisman three
+talisman four
+Helmet 
+Chestplate
+Gloves
+Leggings
+armour for now can be just array 
+talisman one 
+talisman two
+talisman three
+talisman four 
+statspred statspread
+
+Weapon Table
+---------------
+id 
+name 
+statspread requirments  
+location region 
+status (frost bleed poison scarletRot)
+weight 
+weapon_type
+image?
+
+Talisman table 
+------------
+id 
+name 
+location (region)
+desc
+effect
+
+Helmet Table
+-------
+id 
+name 
+location(region)
+weight 
+absorpitons add later 
+
+Chestplate Table
+-------
+id 
+name 
+location(region)
+weight 
+absorpitons add later 
+
+Gloves Table
+-------
+id 
+name 
+location(region)
+weight 
+absorpitons add later 
+
+Leggings Table
+-------
+id 
+name 
+location(region)
+weight 
+absorpitons add later 
+
+StatSpred table
+-----------------
+Guid id 
+Vigor
+Mind
+Enduranc"
+Strength
+Dexterity
+Intelligence
+Faith
+Arcane
+
+Subscriptions 
+subscriber_id 
+post_maker_id 
