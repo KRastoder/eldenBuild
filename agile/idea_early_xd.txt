@@ -1,0 +1,80 @@
+--PROJECT  
+Feathures  : 
+  1.Catching (redis).
+  2.Auth EntityFramework auth rba.
+  3.leaderboard  vrv neki background job svakih 1 sat itd.
+  4.Logging.
+
+  Mozda : File upload images 
+
+Roles :Admin , Users dosta :)  
+  Admins can add new weapons ban users etc basic admin stuff...
+
+what can user do : 
+  1.rate builds ,crud build his own , comment.
+  2.Subscribe to follow guide and he gets a notification in his email or on the site.
+  3.Particapate in the monthly leaderboard that has live rankings of builds hall of fame style.
+  4.Ovo je iffy feature ali mozda real time chat cisto onako ali videcu.
+  5.Sorting po levelima ili po starting classi itd.
+
+Elden ring or game web site where people can make and post about builds 
+
+  tabele 99%: Builds , Weapons ,Users ,Subscriptions , Posts  
+  tabele 50% : Likes ,Chat 
+
+  example of build 
+    level intiger max 713 
+    starting class Samurai 
+    statspred table (Vigor,Mind,Endurance,Strenght ,Dexterity , Arcane,Faith , Intelligence , Mind)
+    main stat : The biggest one 
+    has many weapons string max 2 
+    talismans max 4 
+    enum? statusEffect (Frost,Bleed,ScarletRot,Poison)
+
+weapon type Enum (
+  "Daggers",
+  "Straight Swords",
+  "Greatswords",
+  "Colossal Swords",
+  "Thrusting Swords",
+  "Heavy Thrusting Swords",
+  "Curved Swords",
+  "Curved Greatswords",
+  "Katanas",
+  "Great Katanas",
+  "Twinblades",
+  "Axes",
+  "Greataxes",
+  "Hammers",
+  "Flails",
+  "Great Hammers",
+  "Colossal Weapons",
+  "Spears",
+  "Great Spears",
+  "Halberds",
+  "Reapers",
+  "Whips",
+  "Fists",
+  "Claws",
+  "Light Bows",
+  "Bows",
+  "Greatbows",
+  "Crossbows",
+  "Ballistas",
+  "Glintstone Staffs",
+  "Sacred Seals",
+  "Throwing Blades",
+  "Backhand Blades",
+  "Perfume Bottles",
+  "Thrusting Shields",
+  "Beast Claws",
+  "Light Greatswords",
+  "Hand-to-Hand Arts"
+]
+    
+
+
+
+
+
+
