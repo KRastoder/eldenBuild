@@ -5,9 +5,6 @@ id
 username
 email 
 password
-subscriptions (Many)
-myposts(many)
-subscribers(UsersId or username)
 
 POST_TABLE 
 -----------------

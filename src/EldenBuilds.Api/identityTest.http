@@ -1,0 +1,119 @@
+@baseUrl = https://localhost:5001
+@adminEmail = admin@example.com
+@adminPassword = AdminSigma123!
+@userEmail = testuser@example.com
+@userPassword = TestUser123!
+
+### ─────────────────────────────────────
+###  REGISTER
+### ─────────────────────────────────────
+
+### Register a new user
+POST {{baseUrl}}/api/account/register
+Content-Type: application/json
+
+{
+  "email": "{{userEmail}}",
+  "password": "{{userPassword}}"
+}
+
+### ─────────────────────────────────────
+###  LOGIN
+### ─────────────────────────────────────
+
+### Login as admin (copy token from response into @adminToken below)
+POST {{baseUrl}}/api/account/login
+Content-Type: application/json
+
+{
+  "email": "{{adminEmail}}",
+  "password": "{{adminPassword}}"
+}
+
+### Login as regular user (copy token from response into @userToken below)
+POST {{baseUrl}}/api/account/login
+Content-Type: application/json
+
+{
+  "email": "{{userEmail}}",
+  "password": "{{userPassword}}"
+}
+
+### ─────────────────────────────────────
+###  PASTE YOUR TOKENS HERE AFTER LOGIN
+### ─────────────────────────────────────
+
+@adminToken = PASTE_ADMIN_TOKEN_HERE
+@userToken  = PASTE_USER_TOKEN_HERE
+
+### ─────────────────────────────────────
+###  DASHBOARD  [Authorize] — any logged in user
+### ─────────────────────────────────────
+
+### Access dashboard as admin
+GET {{baseUrl}}/api/dashboard
+Authorization: Bearer {{adminToken}}
+
+### Access dashboard as user
+GET {{baseUrl}}/api/dashboard
+Authorization: Bearer {{userToken}}
+
+### Access dashboard with no token — expect 401
+GET {{baseUrl}}/api/dashboard
+
+### ─────────────────────────────────────
+###  ADMIN ROUTES  [Authorize(Roles = "Admin")]
+### ─────────────────────────────────────
+
+### List all users — admin only, expect 200
+GET {{baseUrl}}/api/admin/users
+Authorization: Bearer {{adminToken}}
+
+### List all users — regular user, expect 403
+GET {{baseUrl}}/api/admin/users
+Authorization: Bearer {{userToken}}
+
+### List all users — no token, expect 401
+GET {{baseUrl}}/api/admin/users
+
+### ─────────────────────────────────────
+###  ROLE MANAGEMENT  [Authorize(Roles = "Admin")]
+### ─────────────────────────────────────
+
+### Assign Manager role to user — expect 200
+POST {{baseUrl}}/api/admin/assign-role
+Authorization: Bearer {{adminToken}}
+Content-Type: application/json
+
+{
+  "userId": "PASTE_USER_ID_HERE",
+  "role": "Manager"
+}
+
+### Remove Manager role from user — expect 200
+POST {{baseUrl}}/api/admin/remove-role
+Authorization: Bearer {{adminToken}}
+Content-Type: application/json
+
+{
+  "userId": "PASTE_USER_ID_HERE",
+  "role": "Manager"
+}
+
+### Assign role as regular user — expect 403
+POST {{baseUrl}}/api/admin/assign-role
+Authorization: Bearer {{userToken}}
+Content-Type: application/json
+
+{
+  "userId": "PASTE_USER_ID_HERE",
+  "role": "Manager"
+}
+
+### ─────────────────────────────────────
+###  LOGOUT
+### ─────────────────────────────────────
+
+### Logout
+POST {{baseUrl}}/api/account/logout
+Authorization: Bearer {{adminToken}}
