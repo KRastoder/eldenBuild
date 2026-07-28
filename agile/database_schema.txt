@@ -14,8 +14,16 @@ title
 desc 
 Build 
 bool StatusEffectBuild?
+likes?
 challenge Build? 
 op build?
+
+LIKES_TABLE 
+------------
+user_id 
+post_id
+
+
 
 Build TABLE
 -------------

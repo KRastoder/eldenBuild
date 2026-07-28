@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EldenBuilds.Api.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260728113759_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20260728133356_InitialMigration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -185,6 +185,51 @@ namespace EldenBuilds.Api.Migrations
                     b.HasIndex("WeaponTwoId");
 
                     b.ToTable("Build");
+                });
+
+            modelBuilder.Entity("EldenBuilds.Api.Models.Like", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<Guid>("PostId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("UserId", "PostId");
+
+                    b.HasIndex("PostId");
+
+                    b.ToTable("Likes");
+                });
+
+            modelBuilder.Entity("EldenBuilds.Api.Models.Post", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("BuildId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("CreatorId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BuildId");
+
+                    b.HasIndex("CreatorId");
+
+                    b.ToTable("Post");
                 });
 
             modelBuilder.Entity("EldenBuilds.Api.Models.StatSpread", b =>
@@ -508,6 +553,44 @@ namespace EldenBuilds.Api.Migrations
                     b.Navigation("WeaponOne");
 
                     b.Navigation("WeaponTwo");
+                });
+
+            modelBuilder.Entity("EldenBuilds.Api.Models.Like", b =>
+                {
+                    b.HasOne("EldenBuilds.Api.Models.Post", "Post")
+                        .WithMany()
+                        .HasForeignKey("PostId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("EldenBuilds.Api.Data.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Post");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("EldenBuilds.Api.Models.Post", b =>
+                {
+                    b.HasOne("EldenBuilds.Api.Models.Build", "Build")
+                        .WithMany()
+                        .HasForeignKey("BuildId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("EldenBuilds.Api.Data.User", "Creator")
+                        .WithMany()
+                        .HasForeignKey("CreatorId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Build");
+
+                    b.Navigation("Creator");
                 });
 
             modelBuilder.Entity("EldenBuilds.Api.Models.Weapon", b =>

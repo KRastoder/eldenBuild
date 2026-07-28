@@ -15,6 +15,7 @@ public class ApplicationDbContext : IdentityDbContext<User>
     public DbSet<StatSpread> StatSpread { get; set; }
     public DbSet<Armour> Armour { get; set; }
     public DbSet<Talisman> Talisman { get; set; }
+    public DbSet<Like> Likes { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -92,7 +93,37 @@ public class ApplicationDbContext : IdentityDbContext<User>
             .WithMany()
             .HasForeignKey(b => b.StatSpreadId)
             .OnDelete(DeleteBehavior.Restrict);
+
+        //POST
+        modelBuilder.Entity<Post>()
+            .HasOne(p => p.Creator)
+            .WithMany()
+            .HasForeignKey(p => p.CreatorId)
+            .OnDelete(DeleteBehavior.Restrict);
+
+        modelBuilder.Entity<Post>()
+            .HasOne(p => p.Build)
+            .WithMany()
+            .HasForeignKey(p => p.BuildId)
+            .OnDelete(DeleteBehavior.Restrict);
+
+        // LIKES
+        modelBuilder.Entity<Like>()
+            .HasKey(l => new { l.UserId, l.PostId });
+
+        modelBuilder.Entity<Like>()
+            .HasOne(l => l.User)
+            .WithMany()
+            .HasForeignKey(l => l.UserId)
+            .OnDelete(DeleteBehavior.Restrict);
+
+        modelBuilder.Entity<Like>()
+            .HasOne(l => l.Post)
+            .WithMany()
+            .HasForeignKey(l => l.PostId)
+            .OnDelete(DeleteBehavior.Cascade);
     }
+
 }
 
 
