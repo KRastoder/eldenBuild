@@ -23,8 +23,6 @@ LIKES_TABLE
 user_id 
 post_id
 
-
-
 Build TABLE
 -------------
 Guid id 

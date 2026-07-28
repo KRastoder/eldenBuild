@@ -1,2 +1,11 @@
-[].Napravi authentikaciju 
+1.Napravi Tables i relacije [x]
+2.Napravi authentikaciju [x]
+3.Napravi crud za Post []
+
+Sta ima Build kao foregn keys?
+Build-> [Armour[4] , Talisman[4],StatSpread,Weapon[2]->StatSpread] 
+
+Likes
+
+
 
