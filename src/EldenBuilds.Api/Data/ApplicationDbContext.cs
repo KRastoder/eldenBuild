@@ -13,6 +13,8 @@ public class ApplicationDbContext : IdentityDbContext<User>
     }
 
     public DbSet<StatSpread> StatSpread { get; set; }
+    public DbSet<Armour> Armour { get; set; }
+    public DbSet<Talisman> Talisman { get; set; }
 }
 
 

@@ -1,7 +1,6 @@
 using System.ComponentModel.DataAnnotations;
-using Microsoft.EntityFrameworkCore;
-namespace EldenBuilds.Api.Models;
 
+namespace EldenBuilds.Api.Models;
 
 public class StatSpread
 {
@@ -44,7 +43,7 @@ public class StatSpread
 
 // StatSpred table
 // -----------------
-// Guid id 
+// Guid id
 // Vigor
 // Mind
 // Enduranc

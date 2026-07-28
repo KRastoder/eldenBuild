@@ -21,7 +21,8 @@ public class AccountController : ControllerBase
     public AccountController(
         UserManager<User> userManager,
         SignInManager<User> signInManager,
-        IConfiguration config)
+        IConfiguration config
+    )
     {
         _userManager = userManager;
         _signInManager = signInManager;
@@ -44,11 +45,17 @@ public class AccountController : ControllerBase
     [HttpPost("login")]
     public async Task<IActionResult> Login([FromBody] LoginDto dto)
     {
-        var user = await _userManager.FindByEmailAsync(dto.Email);
-        if (user == null) return Unauthorized("Invalid credentials.");
+        User? user = await _userManager.FindByEmailAsync(dto.Email);
+        if (user == null)
+            return Unauthorized("Invalid credentials.");
 
-        var result = await _signInManager.CheckPasswordSignInAsync(user, dto.Password, lockoutOnFailure: true);
-        if (!result.Succeeded) return Unauthorized("Invalid credentials.");
+        var result = await _signInManager.CheckPasswordSignInAsync(
+            user,
+            dto.Password,
+            lockoutOnFailure: true
+        );
+        if (!result.Succeeded)
+            return Unauthorized("Invalid credentials.");
 
         var roles = await _userManager.GetRolesAsync(user);
         var token = GenerateToken(user, roles);
@@ -68,7 +75,7 @@ public class AccountController : ControllerBase
         var claims = new List<Claim>
         {
             new(ClaimTypes.NameIdentifier, user.Id),
-            new(ClaimTypes.Email, user.Email!)
+            new(ClaimTypes.Email, user.Email!),
         };
 
         foreach (var role in roles)
