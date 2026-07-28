@@ -8,7 +8,7 @@ public class Weapon
     public StatSpread StatSpread { get; set; } = null!;
     public required string Region { get; set; }
     public string? Status { get; set; }
-    public static int Weight { get; set; }
+    public required int Weight { get; set; }
     public required string WeaponType { get; set; }
     public string? Image { get; set; }
 }

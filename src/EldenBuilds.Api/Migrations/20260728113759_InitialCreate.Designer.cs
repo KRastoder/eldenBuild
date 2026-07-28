@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EldenBuilds.Api.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260728091102_AddedArmour")]
-    partial class AddedArmour
+    [Migration("20260728113759_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -115,6 +115,78 @@ namespace EldenBuilds.Api.Migrations
                     b.ToTable("Armour");
                 });
 
+            modelBuilder.Entity("EldenBuilds.Api.Models.Build", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ChestPlateId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("GlovesId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("HelmetId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("LeggingsId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Level")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("StatSpreadId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("StatusBuild")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("TalismanFourId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("TalismanOneId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("TalismanThreeId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("TalismanTwoId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("WeaponOneId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("WeaponTwoId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ChestPlateId");
+
+                    b.HasIndex("GlovesId");
+
+                    b.HasIndex("HelmetId");
+
+                    b.HasIndex("LeggingsId");
+
+                    b.HasIndex("StatSpreadId");
+
+                    b.HasIndex("TalismanFourId");
+
+                    b.HasIndex("TalismanOneId");
+
+                    b.HasIndex("TalismanThreeId");
+
+                    b.HasIndex("TalismanTwoId");
+
+                    b.HasIndex("WeaponOneId");
+
+                    b.HasIndex("WeaponTwoId");
+
+                    b.ToTable("Build");
+                });
+
             modelBuilder.Entity("EldenBuilds.Api.Models.StatSpread", b =>
                 {
                     b.Property<Guid>("Id")
@@ -148,6 +220,70 @@ namespace EldenBuilds.Api.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("StatSpread");
+                });
+
+            modelBuilder.Entity("EldenBuilds.Api.Models.Talisman", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Effect")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Location")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Talisman");
+                });
+
+            modelBuilder.Entity("EldenBuilds.Api.Models.Weapon", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Image")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Region")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("StatSpreadId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Status")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("WeaponType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Weight")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("StatSpreadId");
+
+                    b.ToTable("Weapon");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -281,6 +417,108 @@ namespace EldenBuilds.Api.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("EldenBuilds.Api.Models.Build", b =>
+                {
+                    b.HasOne("EldenBuilds.Api.Models.Armour", "ChestPlate")
+                        .WithMany()
+                        .HasForeignKey("ChestPlateId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("EldenBuilds.Api.Models.Armour", "Gloves")
+                        .WithMany()
+                        .HasForeignKey("GlovesId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("EldenBuilds.Api.Models.Armour", "Helmet")
+                        .WithMany()
+                        .HasForeignKey("HelmetId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("EldenBuilds.Api.Models.Armour", "Leggings")
+                        .WithMany()
+                        .HasForeignKey("LeggingsId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("EldenBuilds.Api.Models.StatSpread", "StatSpread")
+                        .WithMany()
+                        .HasForeignKey("StatSpreadId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("EldenBuilds.Api.Models.Talisman", "TalismanFour")
+                        .WithMany()
+                        .HasForeignKey("TalismanFourId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("EldenBuilds.Api.Models.Talisman", "TalismanOne")
+                        .WithMany()
+                        .HasForeignKey("TalismanOneId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("EldenBuilds.Api.Models.Talisman", "TalismanThree")
+                        .WithMany()
+                        .HasForeignKey("TalismanThreeId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("EldenBuilds.Api.Models.Talisman", "TalismanTwo")
+                        .WithMany()
+                        .HasForeignKey("TalismanTwoId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("EldenBuilds.Api.Models.Weapon", "WeaponOne")
+                        .WithMany()
+                        .HasForeignKey("WeaponOneId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("EldenBuilds.Api.Models.Weapon", "WeaponTwo")
+                        .WithMany()
+                        .HasForeignKey("WeaponTwoId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("ChestPlate");
+
+                    b.Navigation("Gloves");
+
+                    b.Navigation("Helmet");
+
+                    b.Navigation("Leggings");
+
+                    b.Navigation("StatSpread");
+
+                    b.Navigation("TalismanFour");
+
+                    b.Navigation("TalismanOne");
+
+                    b.Navigation("TalismanThree");
+
+                    b.Navigation("TalismanTwo");
+
+                    b.Navigation("WeaponOne");
+
+                    b.Navigation("WeaponTwo");
+                });
+
+            modelBuilder.Entity("EldenBuilds.Api.Models.Weapon", b =>
+                {
+                    b.HasOne("EldenBuilds.Api.Models.StatSpread", "StatSpread")
+                        .WithMany()
+                        .HasForeignKey("StatSpreadId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("StatSpread");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
